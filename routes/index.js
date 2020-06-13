@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const mustache = require('mustache');
+const {check, validationResult} = require('express-validator');
 
 const userRoute = require('./user');
 
@@ -24,7 +25,7 @@ module.exports = () => {
             }
 
             let errors = '';
-            if (locals.errors) {
+            if (typeof locals !== 'undefined' && locals.errors) {
                 let errorsArray = [];
                 locals.errors.forEach((el) => {
                     errorsArray.push('<li>' + el.msg + '</li>');
