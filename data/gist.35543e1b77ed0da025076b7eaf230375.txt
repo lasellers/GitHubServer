@@ -1,0 +1,172 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
+
+/// <summary>
+/// sort3
+/// @author lasellers@gmail.com Lewis A. Sellers
+/// </summary>
+namespace sort3
+{
+    /// <summary>
+    ///
+    /// </summary>
+    class Sort3
+    {
+        static void Main(string[] args)
+        {
+            Units unit = new Units();
+            unit.loadSortSave();
+            Console.ReadLine();
+        }
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    public class UnitData
+    {
+        public int Id { get; set; }
+
+        public int Unit { get; set; }
+        public string Subunit { get; set; }
+        [DisplayName("Raw")]
+        public string Raw { get; set; }
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    class Units
+    {
+        string unitsFilename = @"Content\units.txt";
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void loadSortSave()
+        {
+            this.saveData(
+                this.sortByUnitNumber(
+                    this.loadData()
+                )
+            );
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
+        private string[] loadDataAsLines()
+        {
+            string line;
+            List<string> lines = new List<string>();
+
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), unitsFilename);
+            try
+            {
+                StreamReader file = new StreamReader(filePath);
+                while ((line = file.ReadLine()) != null)
+                {
+                    Debug.WriteLine("READ: " + line);
+                    lines.Add(line);
+                }
+
+                file.Close();
+            }
+            catch (System.IO.DirectoryNotFoundException)
+            {
+                Console.WriteLine("directory {0} not found.", filePath);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.WriteLine("file {0} not found", filePath);
+            }
+
+            return lines.ToArray();
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
+        private List<UnitData> loadData()
+        {
+            string idPattern = @"[^A-Za-z0-9]";
+            string unitPattern = @"([0-9]+|[a-zA-Z]+)";
+
+            List<UnitData> unsorted = new List<UnitData>();
+
+            string[] lines = this.loadDataAsLines();
+
+            foreach (string line in lines)
+            {
+                Regex regexid = new Regex(idPattern);
+                string replacement = "";
+                string id = regexid.Replace(line.Split('-')[0], replacement);
+
+                Regex regex = new Regex(unitPattern);
+                MatchCollection items = regex.Matches(id);
+
+                int unit;
+                string subunit;
+                switch (items.Count)
+                {
+                    case 1:
+                        unit = Int32.Parse(items[0].Value);
+                        unsorted.Add(new UnitData()
+                        {
+                            Unit = unit,
+                            Subunit = "",
+                            Raw = line
+                        });
+                        break;
+
+                    case 2:
+                        unit = Int32.Parse(items[0].Value);
+                        subunit = items[1].Value;
+                        unsorted.Add(new UnitData()
+                        {
+                            Unit = unit,
+                            Subunit = subunit,
+                            Raw = line
+                        });
+                        break;
+                }
+
+            }
+
+            return unsorted;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="unsorted"></param>
+        /// <returns></returns>
+        private List<UnitData> sortByUnitNumber(List<UnitData> unsorted)
+        {
+            List<UnitData> SortedList = unsorted.OrderBy(o => o.Unit).ThenBy( n => n.Subunit).ToList();
+            return SortedList;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="sorted"></param>
+        private void saveData(List<UnitData> sorted)
+        {
+            foreach (UnitData row in sorted)
+            {
+                Console.WriteLine("{0}",row.Raw);
+            }
+        }
+    }
+
+}
