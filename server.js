@@ -43,16 +43,7 @@ app.use((err, request, response, next) => {
     response.render('err');
 });
 
-router.post('/', [
-    check('name')
-        .trim()
-        .isLength({min: 3})
-        .escape()
-        .withMessage('A name is required')
-], (request, response) => {
-    console.log(request.body);
-    return response.send('Form posted');
-});
+
 app.listen(port, () => {
     console.log(`Server listing on ${port}`);
 });
