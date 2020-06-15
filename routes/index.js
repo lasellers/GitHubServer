@@ -14,7 +14,7 @@ module.exports = () => {
             request.session.visitCount = 0;
         }
         request.session.visitCount += 1;
-        console.log(`visits ${request.session.visitCount}`);
+        // console.log(`visits ${request.session.visitCount}`);
 
         const errors = request.session.feedback ? request.session.feedback.errors : false;
         request.session.feedback = {};
