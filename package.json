@@ -8,7 +8,9 @@
     "dev": "npx nodemon server.js",
     "dev3": "nodemon server.js",
     "dev2": "nodemon --ignore test.json server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint",
+    "debug": "cross-env DEBUG=madia:* nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -19,11 +21,12 @@
     "express-validator": "^6.5.0",
     "http-errors": "^1.7.3",
     "mustache": "^4.0.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "typescript": "^3.9.5"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^3.2.0",
-    "@typescript-eslint/parser": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "@typescript-eslint/parser": "^3.3.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",

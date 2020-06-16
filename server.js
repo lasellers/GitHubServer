@@ -26,9 +26,11 @@ app.use(cookieSession({
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({}));
 
+// eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, './static')));
 
 app.set('view engine', 'mustache');
+// eslint-disable-next-line no-undef
 app.set('views', path.join(__dirname, './views'));
 
 app.use('/', routes());
@@ -46,5 +48,6 @@ app.use((err, request, response, next) => {
 
 
 app.listen(port, () => {
-    console.log(`Server listing on ${port}`);
+    // eslint-disable-next-line no-console
+    console.debug(`Server listing on ${port}`);
 });

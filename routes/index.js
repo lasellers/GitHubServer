@@ -26,7 +26,7 @@ module.exports = () => {
 
             let errors = '';
             if (typeof locals !== 'undefined' && locals.errors) {
-                let errorsArray = [];
+                const errorsArray = [];
                 locals.errors.forEach((el) => {
                     errorsArray.push('<li>' + el.msg + '</li>');
                 });
