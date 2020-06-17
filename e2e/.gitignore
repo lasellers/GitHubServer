@@ -1,0 +1,17 @@
+node_modules
+**/node_modules/
+**/vendor/
+dist/
+.ssh/
+/.npm/*
+/.nvm/*
+/.cache/*
+/.config/*
+/.pki/*
+/.local/*
+/.idea/*
+.env
+*.log
+.bash_history
+
+

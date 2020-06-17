@@ -5,9 +5,9 @@
         "es2020": true
     },
     "extends": [
-        "google"
+        "eslint:recommended", "prettier"
     ],
-    "parser": "@typescript-eslint/parser",
+    // "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 11
     },
@@ -15,5 +15,10 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "no-var": "error",
+        "no-console": "warn",
+        "no-empty": "error",
+        "no-multiple-empty-lines": "error",
+        "prefer-const": "error"
     }
 }
