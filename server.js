@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const mustache = require('mustache');
-const {promisify} = require("util");
+const {promisify} = require('util');
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 const cookieSession = require('cookie-session');
@@ -20,8 +20,8 @@ const port = 3001;
 app.set('trust proxy', 1);
 
 app.use(cookieSession({
-    name: 'session',
-    keys: ['abcdefghijk12345', '12345abcdefghj']
+  name: 'session',
+  keys: ['abcdefghijk12345', '12345abcdefghj'],
 }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({}));
@@ -34,17 +34,17 @@ app.set('views', path.join(__dirname, './views'));
 app.use('/', routes());
 
 app.use((request, response, next) => {
-    return next(createError(404, 'Not found'));
+  return next(createError(404, 'Not found'));
 });
 app.use((err, request, response, next) => {
-    response.locals.message = err.message;
-    const status = err.status || 500;
-    response.locals.status = status;
-    response.status(status);
-    response.render('err');
+  response.locals.message = err.message;
+  const status = err.status || 500;
+  response.locals.status = status;
+  response.status(status);
+  response.render('err');
 });
 
 
 app.listen(port, () => {
-    console.log(`Server listing on ${port}`);
+  console.log(`Server listing on ${port}`);
 });

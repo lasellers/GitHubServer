@@ -5,15 +5,14 @@
         "es2020": true
     },
     "extends": [
-        "standard", "prettier"
+        "google"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 11
     },
     "plugins": [
-        "@typescript-eslint",
-        "prettier"
+        "@typescript-eslint"
     ],
     "rules": {
     }
