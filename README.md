@@ -1,7 +1,21 @@
 ## GitHubServer
 
-Simple experiment to add a mock backend of the GitHub API in node.js.
+Simple experiment to impliment a partial live data stub backend of the GitHub API in node.js.
 
-## Tests
+### Run
 
+```
+npm run start
+```
+
+### Tests
+
+```
 npm test
+```
+
+### Coverage
+
+```
+npm run coverage
+```

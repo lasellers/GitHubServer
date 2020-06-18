@@ -2,12 +2,17 @@
   "name": "githubserver",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lasellers/GitHubServer.git"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "test": "mocha",
     "eslint": "eslint .",
-    "debug": "cross-env DEBUG=madia:* nodemon",
+    "coverage": "nyc npm run test",
+    "debug": "cross-env DEBUG=lasellers:* nodemon",
     "dev": "npx nodemon server.js",
     "dev3": "nodemon server.js",
     "dev2": "nodemon --ignore test.json server.js"
@@ -21,14 +26,15 @@
     "express-validator": "^6.5.0",
     "http-errors": "^1.7.3",
     "mustache": "^4.0.1",
-    "node-fetch": "^2.6.0",
-    "typescript": "^3.9.5"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.6",
     "@typescript-eslint/eslint-plugin": "^3.3.0",
     "@typescript-eslint/parser": "^3.3.0",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cross-env": "^7.0.2",
     "eslint": "^7.2.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
@@ -40,6 +46,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^8.0.1",
     "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
     "prettier": "^2.0.5",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",

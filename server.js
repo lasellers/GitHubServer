@@ -9,7 +9,7 @@ const path = require("path");
 const cookieSession = require("cookie-session");
 const createError = require("http-errors");
 const bodyParser = require("body-parser");
-const { check, validationResult } = require("express-validator");
+// const { check, validationResult } = require("express-validator");
 
 const routes = require("./routes");
 
@@ -25,25 +25,31 @@ app.use(cookieSession({
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({}));
-app.setHeader("Content-Type", "application/json");
+// app.setHeader("Content-Type", "application/json");
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, "./static")));
 
 app.set("view engine", "mustache");
 // eslint-disable-next-line no-undef
 app.set("views", path.join(__dirname, "./views"));
+// eslint-disable-next-line no-undef
+app.set("dirname", path.join(__dirname));
 
 app.use("/", routes());
 
 app.use((request, response, next) => {
   return next(createError(404, "Not found"));
 });
+
 app.use((err, request, response, next) => {
   response.locals.message = err.message;
   const status = err.status || 500;
   response.locals.status = status;
-  response.status(status);
-  response.render("err");
+  // response.status(status);
+  // response.render("err");
+
+  response.setHeader("Content-Type", "application/json");
+  return response.json({ error: "404 Not Found", "message": err.message });
 });
 
 app.listen(port, () => {
