@@ -1,4 +1,5 @@
-![Build Status](https://circleci.com/gh/lasellers/ReLifeBackend.png?circle-token=e949fd7d7af872231de030feb04b73e843abd3f7)
+![Build Status](https://circleci.com/gh/lasellers/GitHubServer.png?circle-token=e949fd7d7af872231de030feb04b73e843abd3f7)
+![Build Status](https://travis-ci.org/lasellers/GitHubServer.svg?branch=master)
 
 ## GitHubServer
 
