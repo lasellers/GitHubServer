@@ -7,11 +7,11 @@ const moment = require('moment');
 const {Authenticator} = require('authenticator-browser-extension');
 
 //
-var fs = require('fs');
+const fs = require('fs');
 
 // reports & failed screenshots
-var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
-var reporter = new HtmlScreenshotReporter({
+const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
+const reporter = new HtmlScreenshotReporter({
     dest: 'logs/e2e-report',
     filename: 'e2e-report.html',
     captureOnlyFailedSpecs: true,
@@ -31,7 +31,7 @@ var PORT_PROXY_SERVER = 8899;
 */
 //const {Authenticator} = require('authenticator-browser-extension');
 
-let capabilitiesMap = {
+const capabilitiesMap = {
     'chrome': {
         browserName: 'chrome',
         chromeOptions: {
@@ -141,7 +141,7 @@ let capabilitiesMap = {
 
 // load .env for pre-config operations (it is loaded again later as part of the normal config setup,
 // but too late for what is needed here, where we are dynamically setting up parts of the config)
-let envConfig = require('./env.js').envConfig;
+const envConfig = require('./env.js').envConfig;
 
 // resolutions we can use c.f. --resolution=1080p
 // note "max" and "maximum" can also be used.
@@ -191,15 +191,15 @@ const resolutionsList = {
 ;
 
 // flags to indicate which frontend we are testing
-let ngFront = false;
-let cwFront = false;
+const ngFront = false;
+const cwFront = false;
 
 // There are a few items we have to load before we do the export.config because we use that
 // data to dynamically populate the config data...
 let browserMode = 'chrome';
 let resolution = '1080p';
 let capabilities;
-let env = 'stage';
+const env = 'stage';
 let basicAuth = {
     username: 'user',
     password: 'password'
@@ -218,8 +218,8 @@ if (typeof envConfig.browserMode !== 'undefined') {
 // get browser from cli
 // --browser=chrome-headless
 process.argv.slice(3).forEach(function (arg) {
-    var name = arg.split('=')[0];
-    var value = arg.split('=')[1];
+    let name = arg.split('=')[0];
+    const value = arg.split('=')[1];
     name = name.replace('--', '');
 
     if (name === 'browserMode' || name === 'browser' || name === 'mode') {
@@ -786,7 +786,7 @@ exports.config = {
                 if (browserLog.length) {
                     console.error(browserLog);
                     for (index = 0; index < browserLog.length; index++) {
-                        let log = browserLog[index];
+                        const log = browserLog[index];
                         if (log.level.name === "ERROR") {
                             console.log('Browser console.error:' + log.message);
                             global.logger.error('Browser console.error:' + log.message);
@@ -810,7 +810,7 @@ exports.config = {
         if (browser.params.debugHelpers)
             console.log("onPrepare: load helpers");
 
-        var jasmineReporters = require("jasmine-reporters");
+        const jasmineReporters = require("jasmine-reporters");
         require("jasmine-expect");
 
         require('./helper.matchers.js');
@@ -852,7 +852,7 @@ exports.config = {
             global.logger.info('browser.driver.manage().maximize()');
         } else {
             // set browser to standard 1080p
-            let screenSize = resolutionsList[resolution];
+            const screenSize = resolutionsList[resolution];
             browser.driver.manage().window().setSize(screenSize.width, screenSize.height);
             global.logger.info('browser.driver.manage().window().setSize resolution:' + screenSize.width + ',' + screenSize.height);
         }
@@ -888,7 +888,7 @@ exports.config = {
             console.log("afterLaunch:");
 
         // screenshots -- sets it up so we get screenshots when there is a failed test
-        var exitCode = 0;
+        const exitCode = 0;
         return new Promise(function (resolve) {
             reporter.afterLaunch(resolve.bind(this, exitCode));
         });
